@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo Ajax</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <form id="login" role="form">
+        <div class="form-group">
+            <button class="btn btn-success btn-lg" id="btnLogin" type="button">Login</button>
+        </div>
+    </form>
+
+    <h1 id="hello" style="display: none;">Xin chào Tú đz!</h1>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#btnLogin").on("click", function() {
+            $.ajax({
+               url: "http://tools.tutran.me/json.php",
+               jsonpCallback: "a",
+               dataType: "jsonp",
+               success: function (data) {
+                    alert("Hello " + data.name);
+               },
+               error: function () {
+                    alert("Request Error!");
+               }
+            });
+        });
+    });
+</script>
+</body>
+</html>
