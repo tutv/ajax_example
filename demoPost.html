@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo Ajax</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <form id="login" role="form">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Email" id="email" name="email">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Password" id="pass" name="pass">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success btn-lg" id="btnLogin" type="button">Login</button>
+        </div>
+    </form>
+
+    <h1 id="hello" style="display: none;">Xin chào Tú đz!</h1>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#btnLogin").on("click", function () {
+            var email = $("#email").val();
+            var pass = $("#pass").val();
+            $.ajax({
+                url: "./user.php",
+                method: "POST",
+                dataType: "json",
+                data: {email: email, pass: pass},
+                success: function (data) {
+                    if (!data.status) {
+                        alert(data.notify);
+                    } else {
+                        $("#login").hide();
+                        alert(data.notify);
+                        $("#hello").show();
+                    }
+                },
+                error: function () {
+                    alert("Request error!");
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

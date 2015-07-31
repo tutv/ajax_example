@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Demo Ajax</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<button class="btn btn-primary" id="addRandUser">Add User</button>
+		<p id="result"></p>
+	</div>
+
+	<script src="js/jquery.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$("#addRandUser").on("click", function () {
+				$.ajax({
+					url: './json.php',
+					dataTypes: 'text',
+					method: 'GET',
+					success: function(text) {
+						$("#result").append(text + "<br>");
+
+					},
+					error: function () {
+						alert("Request error!");
+					}
+
+				});
+			});
+		});
+	</script>
+</body>
+</html>
